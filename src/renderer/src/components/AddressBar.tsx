@@ -10,7 +10,7 @@ const AddressBar = ({
       <div className="container">
         <input
           type="text"
-          className="form-control"
+          className="form-control border-primary shadow-sm"
           id="no-drag"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
