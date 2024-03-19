@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import './assets/styles.css'
 import AddressBar from './components/AddressBar'
+import useWindowsDimensions from './hooks/useWindowsDimensions'
 
 function App(): JSX.Element {
-  const [url] = useState<string>('https://cyberjournal.app')
-
+  const [url, setUrl] = useState<string>('https://cyberjournal.app')
+  const windowDimensions = useWindowsDimensions()
   return (
     <>
-      <AddressBar />
-      <div className="container responsive">
-        <webview src={url} className="h-100"></webview>
-      </div>
+      <AddressBar setUrl={setUrl} url={url} />
+      <webview
+        src={url}
+        style={{
+          height: windowDimensions.height - 54
+        }}
+      ></webview>
     </>
   )
 }

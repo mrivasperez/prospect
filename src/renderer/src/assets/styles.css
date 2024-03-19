@@ -1,5 +1,7 @@
 #drag {
-  margin: 0;
-  padding: 0;
   -webkit-app-region: drag;
+}
+
+#no-drag {
+  -webkit-app-region: no-drag;
 }
