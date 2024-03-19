@@ -1,6 +1,13 @@
 # Prospect
 
-An Electron web browser with React and TypeScript
+A simple web browser built with Electron and React.
+
+![](screenshot.png)
+
+## Credits
+
+- [Bootswatch](https://bootswatch.com/) for Cerulean theme for Bootstrap.
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
 
 ## Recommended IDE Setup
 
