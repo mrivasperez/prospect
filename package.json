@@ -5,6 +5,7 @@
   "main": "./out/main/index.js",
   "author": "migue",
   "homepage": "https://www.linkedin.com/in/mrivasperez/",
+  "productName": "Prospect",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

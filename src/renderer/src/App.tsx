@@ -15,7 +15,7 @@ function App(): JSX.Element {
       {url ? (
         <webview
           ref={webviewRef}
-          src={url}
+          src={`${url.includes('https://') ? '' : 'https://'}${url}`}
           style={{
             height: windowDimensions.height - 54
           }}

@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: prospect
+productName: Prospect
 directories:
   buildResources: build
 files:
