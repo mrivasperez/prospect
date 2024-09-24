@@ -1,7 +1,7 @@
 # Prospect
 
-A simple web browser built with Electron and React.
-
+A simple web browser built with Electron and React. [Read article.
+](https://www.linkedin.com/pulse/building-web-browser-react-electron-miguel-rivas-perez-ja1kc/)
 ![](screenshot.png)
 
 ## Credits
