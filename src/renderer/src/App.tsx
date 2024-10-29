@@ -3,6 +3,7 @@ import './assets/styles.css'
 import AddressBar from './components/AddressBar'
 import useWindowsDimensions from './hooks/useWindowsDimensions'
 import Splash from './components/Splash'
+import NavigationBar from './feature/navigation/NavigationBar'
 
 function App(): JSX.Element {
   const [url, setUrl] = useState<string>('')
@@ -11,6 +12,7 @@ function App(): JSX.Element {
 
   return (
     <>
+      <NavigationBar />
       <AddressBar setUrl={setUrl} url={url} />
       {url ? (
         <webview
