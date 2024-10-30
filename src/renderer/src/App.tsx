@@ -4,6 +4,7 @@ import AddressBar from './components/AddressBar'
 import useWindowsDimensions from './hooks/useWindowsDimensions'
 import Splash from './components/Splash'
 import NavigationBar from './feature/navigation/NavigationBar'
+import TitleBar from './components/TitleBar'
 
 function App(): JSX.Element {
   const [url, setUrl] = useState<string>('')
@@ -12,6 +13,7 @@ function App(): JSX.Element {
 
   return (
     <>
+      <TitleBar />
       <NavigationBar />
       <AddressBar setUrl={setUrl} url={url} />
       {url ? (
