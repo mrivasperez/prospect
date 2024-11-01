@@ -5,19 +5,23 @@ import useWindowsDimensions from './hooks/useWindowsDimensions'
 import Splash from './components/Splash'
 import NavigationBar from './feature/navigation/NavigationBar'
 import TitleBar from './components/TitleBar'
+import { WebviewTag } from 'electron'
 
 function App(): JSX.Element {
   const [url, setUrl] = useState<string>('')
   const windowDimensions = useWindowsDimensions()
-  const webviewRef = useRef<HTMLWebViewElement>(null)
-
+  const webviewRef = useRef<WebviewTag>(null)
+  const [pageTitle, setPageTitle] = useState('')
   useEffect(() => {
     if (webviewRef.current) {
       webviewRef.current.addEventListener('did-navigate', (event) => {
         console.log(event)
-        // TODO resolve
-        // @ts-expect-error url is any type
         setUrl(event.url)
+      })
+
+      // Get the title from the webview
+      webviewRef.current.executeJavaScript(`document.title;`, (title) => {
+        setPageTitle(title)
       })
     }
 
@@ -30,8 +34,8 @@ function App(): JSX.Element {
 
   return (
     <>
-      <TitleBar />
-      <NavigationBar />
+      <TitleBar pageTitle={pageTitle} />
+      <NavigationBar webViewRef={webviewRef} />
       <AddressBar setUrl={setUrl} url={url} />
       {url ? (
         <webview
