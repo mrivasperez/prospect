@@ -1,6 +1,6 @@
 import goBack from './assets/go-previous.svg'
 import goForward from './assets/go-next.svg'
-
+import history from './assets/recent.svg'
 const NavigationBar = (): JSX.Element => {
   return (
     <div
@@ -8,7 +8,7 @@ const NavigationBar = (): JSX.Element => {
       id="drag"
     >
       <div className="d-flex">
-        <button className="btn  d-flex align-center" id="no-drag">
+        <button className="btn d-flex" id="no-drag">
           <img src={goBack} height={40} />
           <p className="m-0 py-2 ms-1 mt-0 fw-medium">Back</p>
         </button>
@@ -16,6 +16,10 @@ const NavigationBar = (): JSX.Element => {
           <img src={goForward} className="lead" height={40} />
         </button>
       </div>
+
+      <button className="btn p-0 me-2" id="no-drag">
+        <img src={history} className="lead" height={40} />
+      </button>
     </div>
   )
 }
