@@ -6,7 +6,11 @@ const AddressBar = ({
   setUrl: (newUrl: string) => void
 }): JSX.Element => {
   return (
-    <div className="d-flex bg-body-tertiary align-center border-bottom sticky-top ps-0" id="drag">
+    <div
+      className="d-flex bg-body-tertiary align-center border-bottom sticky-top ps-0"
+      id="drag"
+      style={{ top: 96 }}
+    >
       <p className="text-secondary m-0 p-2 align-center">Address</p>
       <input
         type="text"
