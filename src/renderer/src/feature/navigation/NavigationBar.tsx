@@ -14,6 +14,7 @@ const NavigationBar = ({
     <div
       className="d-flex justify-content-between border-bottom bg-body-tertiary sticky-top"
       id="drag"
+      style={{ top: 41 }}
     >
       <div className="d-flex">
         <button className="btn d-flex" id="no-drag" onClick={handleGoBack}>
