@@ -5,46 +5,60 @@ import useWindowsDimensions from './hooks/useWindowsDimensions'
 import Splash from './components/Splash'
 import NavigationBar from './feature/navigation/NavigationBar'
 import TitleBar from './components/TitleBar'
-import { WebviewTag } from 'electron'
 
 function App(): JSX.Element {
   const [url, setUrl] = useState<string>('')
   const windowDimensions = useWindowsDimensions()
-  const webviewRef = useRef<WebviewTag>(null)
-  const [pageTitle, setPageTitle] = useState('')
-  useEffect(() => {
-    if (webviewRef.current) {
-      webviewRef.current.addEventListener('did-navigate', (event) => {
-        console.log(event)
-        setUrl(event.url)
-      })
+  const webviewRef = useRef<Electron.WebviewTag>(null)
+  const [pageTitle, setWebviewTitle] = useState<string>('')
 
-      // Get the title from the webview
-      webviewRef.current.executeJavaScript(`document.title;`, (title) => {
-        setPageTitle(title)
-      })
+  useEffect(() => {
+    const handleTitleUpdate = (): void => {
+      // Get the title directly from the webview element
+      if (webviewRef.current) {
+        const newTitle = webviewRef.current.getTitle()
+        setWebviewTitle(newTitle)
+        console.log('Title Updated:', newTitle)
+      }
+    }
+
+    const handleLoad = (): void => {
+      if (webviewRef.current) {
+        setWebviewTitle(webviewRef.current.getTitle())
+        console.log('Initial Title:', webviewRef.current.getTitle())
+      }
+    }
+
+    if (webviewRef.current) {
+      webviewRef.current.addEventListener('did-finish-load', handleLoad)
+      webviewRef.current.addEventListener('page-title-updated', handleTitleUpdate)
     }
 
     return () => {
       if (webviewRef.current) {
-        webviewRef.current.removeEventListener('did-navigate', () => {})
+        webviewRef.current.removeEventListener('did-finish-load', handleLoad)
+        webviewRef.current.removeEventListener('page-title-updated', handleTitleUpdate)
       }
     }
   }, [])
+
+  const handleUrlChange = (newUrl: string): void => {
+    setUrl(newUrl.includes('https://') || newUrl.includes('http://') ? newUrl : `https://${newUrl}`)
+  }
 
   return (
     <>
       <TitleBar pageTitle={pageTitle} />
       <NavigationBar webViewRef={webviewRef} />
-      <AddressBar setUrl={setUrl} url={url} />
+      <AddressBar setUrl={handleUrlChange} url={url} />
       {url ? (
         <webview
           ref={webviewRef}
-          src={`${url.includes('https://') ? '' : 'https://'}${url}`}
+          src={url}
           style={{
             height: windowDimensions.height - 54
           }}
-        ></webview>
+        />
       ) : (
         <Splash />
       )}

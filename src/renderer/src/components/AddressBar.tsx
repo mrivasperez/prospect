@@ -3,7 +3,7 @@ const AddressBar = ({
   setUrl
 }: {
   url: string
-  setUrl: React.Dispatch<React.SetStateAction<string>>
+  setUrl: (newUrl: string) => void
 }): JSX.Element => {
   return (
     <div className="d-flex bg-body-tertiary align-center border-bottom sticky-top ps-0" id="drag">
